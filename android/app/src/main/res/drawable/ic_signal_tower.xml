@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 信号塔应用图标：中心塔柱加两侧无线电波弧线。 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:fillColor="#07111F" android:pathData="M0,0h108v108h-108z" />
+    <path android:fillColor="#35D5C8" android:pathData="M53,20h2v68h-2z" />
+    <path android:fillColor="#35D5C8" android:pathData="M35,88h38v3h-38z" />
+    <path android:fillColor="#65E4D2" android:pathData="M53,20l-18,71h5l15,-58z" />
+    <path android:fillColor="#65E4D2" android:pathData="M55,20l18,71h-5l-15,-58z" />
+    <path android:fillColor="#65E4D2" android:pathData="M53.5,12a4,4 0,1 0,0.1 0z" />
+    <path android:fillColor="#35BFB4" android:pathData="M24,56c4,-15 14,-24 28,-27l1,4c-12,3 -21,11 -25,24z" />
+    <path android:fillColor="#35BFB4" android:pathData="M84,56c-4,-15 -14,-24 -28,-27l-1,4c12,3 21,11 25,24z" />
+    <path android:fillColor="#1F8F8A" android:pathData="M14,65c5,-22 19,-36 38,-40l1,4c-17,4 -29,17 -34,37z" />
+    <path android:fillColor="#1F8F8A" android:pathData="M94,65c-5,-22 -19,-36 -38,-40l-1,4c17,4 29,17 34,37z" />
+</vector>

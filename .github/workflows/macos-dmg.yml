@@ -1,0 +1,54 @@
+name: macOS DMG
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: macos-dmg-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  macos:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.44.4'
+          channel: stable
+          cache: true
+      - name: Resolve and validate
+        run: |
+          flutter pub get
+          flutter analyze --no-pub
+          flutter test --no-pub
+      - name: Build macOS release
+        run: |
+          set -o pipefail
+          flutter build macos --release --no-pub 2>&1 | tee macos-build.log
+      - name: Package DMG
+        run: python3 tool/package_macos.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dianbo-macos-dmg
+          path: dist/*
+          if-no-files-found: error
+      - name: Publish test package
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view macos-test >/dev/null 2>&1 || gh release create macos-test --prerelease --title '电波表授时 · macOS 测试版' --notes-file tool/macos-release-notes.md
+          gh release upload macos-test dist/* --clobber
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-build-log
+          path: macos-build.log
+          if-no-files-found: ignore
